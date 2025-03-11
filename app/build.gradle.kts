@@ -25,15 +25,18 @@ dependencies {
     implementation("com.mashape.unirest:unirest-java:1.4.9")
     implementation("com.h2database:h2:2.2.224")
     implementation("com.zaxxer:HikariCP:5.1.0")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
     implementation("org.apache.commons:commons-text:1.11.0")
+    implementation("gg.jte:jte-runtime:3.1.16")
     implementation("gg.jte:jte:3.1.9")
     implementation("org.slf4j:slf4j-simple:2.0.9")
-    implementation("io.javalin:javalin:6.1.3")
+    implementation("io.javalin:javalin:6.4.0")
     implementation("io.javalin:javalin-bundle:6.1.3")
     implementation("io.javalin:javalin-rendering:6.1.3")
     implementation("org.jsoup:jsoup:1.18.3")
-    testImplementation("org.assertj:assertj-core:3.25.3")
+    implementation("org.postgresql:postgresql:42.7.2")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.1")
+    testImplementation("org.assertj:assertj-core:3.27.2")
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
@@ -47,5 +50,12 @@ tasks.test {
         // showStackTraces = true
         // showCauses = true
         showStandardStreams = true
+    }
+}
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }
