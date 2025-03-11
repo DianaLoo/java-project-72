@@ -67,7 +67,7 @@ public class AppTest {
     }
 
     @Test
-    public void test3() throws Exception {
+    public void test3() throws SQLException {
         var url = new Url("https://www.example.com");
         UrlRepository.save(url);
         JavalinTest.test(app, (server, client) -> {
@@ -79,7 +79,7 @@ public class AppTest {
 
 
     @Test
-    public void test4() throws Exception {
+    public void test4() throws SQLException {
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/urls/7777777");
             assertThat(response.code()).isEqualTo(404);

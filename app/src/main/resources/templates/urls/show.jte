@@ -40,19 +40,19 @@ content = @`
                         <th>Дата проверки</th>
                     </tr>
                     </thead>
+                    @if(!page.getUrlList().isEmpty())
                     <tbody>
-
-                    @for(var check: page.getUrlList())
+                    @for(var check : page.getUrlList())
                         <tr>
                             <td>${check.getId()}</td>
                             <td>${check.getStatusCode()}</td>
                             <td>${check.getTitle()}</td>
                             <td>${check.getH1()}</td>
                             <td>${check.getDescription()}</td>
-                            <td>${check.getCreatedAtFormatted()}</td>
+                            <td>${check.getCreatedAt().toString()}</td>
                         </tr>
                     @endfor
-
+                    @endif
                     </tbody>
                 </table>
             </div>

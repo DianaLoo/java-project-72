@@ -4,6 +4,7 @@ package hexlet.code.controller;
 import hexlet.code.dto.urls.UrlPage;
 import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
+import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
@@ -31,7 +32,8 @@ public class UrlsController {
         var id = ctx.pathParamAsClass("id", Long.class).get();
         var url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Page not found"));
-        var page = new UrlPage(url);
+        var urlList = UrlCheckRepository.getEntities(id);
+        var page = new UrlPage(url, urlList);
         ctx.render("urls/show.jte", model("page", page));
     }
     public static void create(Context ctx) throws SQLException,  IllegalArgumentException  {
