@@ -1,10 +1,10 @@
 package hexlet.code;
 
-//import hexlet.code.model.Url;
-//import hexlet.code.model.UrlCheck;
-//import hexlet.code.repository.UrlRepository;
-//import hexlet.code.repository.UrlCheckRepository;
-//import hexlet.code.util.NamedRoutes;
+import hexlet.code.model.Url;
+import hexlet.code.model.UrlCheck;
+import hexlet.code.repository.UrlRepository;
+import hexlet.code.repository.UrlCheckRepository;
+import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
 import okhttp3.mockwebserver.MockResponse;
@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-//import java.util.List;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,17 +66,16 @@ public class AppTest {
         });
     }
 
-//    @Test
-//    public void test3() throws SQLException {
-//        var url = new Url("https://www.example.com");
-//        UrlRepository.save(url);
-//        JavalinTest.test(app, (server, client) -> {
-//            var response = client.get("/urls/" + url.getId());
-//            assertThat(response.code()).isEqualTo(200);
-//            assertThat(response.body().string()).contains("https://www.example.com");
-//        });
-//    }
-
+    @Test
+    public void test3() throws SQLException {
+        var url = new Url("https://www.example.com");
+        UrlRepository.save(url);
+        JavalinTest.test(app, (server, client) -> {
+            var response = client.get("/urls/" + url.getId());
+            assertThat(response.code()).isEqualTo(200);
+            assertThat(response.body().string()).contains("https://www.example.com");
+        });
+    }
 
     @Test
     public void test4() throws SQLException {
@@ -86,20 +85,20 @@ public class AppTest {
         });
     }
 
-//    @Test
-//    public void test5() throws SQLException {
-//        String mockUrl = mockServer.url("/").toString();
-//        Url url = new Url(mockUrl);
-//        UrlRepository.save(url);
-//
-//        JavalinTest.test(app, (server, client) -> {
-//            var response = client.post(NamedRoutes.urlCheckPath(url.getId()));
-//            List<UrlCheck> checkList = UrlCheckRepository.getEntities(url.getId());
-//            assertThat(response.code()).isEqualTo(200);
-//            UrlCheck firstCheck = checkList.get(0);
-//            assertThat(firstCheck.getStatusCode()).isEqualTo(200);
-//            assertThat(firstCheck.getH1()).isEqualTo("H1");
-//            assertThat(firstCheck.getDescription()).isEqualTo("description");
-////        });
-//    }
+    @Test
+    public void test5() throws SQLException {
+        String mockUrl = mockServer.url("/").toString();
+        Url url = new Url(mockUrl);
+        UrlRepository.save(url);
+
+        JavalinTest.test(app, (server, client) -> {
+            var response = client.post(NamedRoutes.urlCheckPath(url.getId()));
+            List<UrlCheck> checkList = UrlCheckRepository.getEntities(url.getId());
+            assertThat(response.code()).isEqualTo(200);
+            UrlCheck firstCheck = checkList.get(0);
+            assertThat(firstCheck.getStatusCode()).isEqualTo(200);
+            assertThat(firstCheck.getH1()).isEqualTo("H1");
+            assertThat(firstCheck.getDescription()).isEqualTo("description");
+        });
+    }
 }

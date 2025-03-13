@@ -30,7 +30,7 @@ content = @`
                     <button type="submit" class="btn btn-primary">Запустить проверку</button>
                 </form>
                 <table class="table table-bordered table-hover mt-3">
-                    <thead>
+                    <tbody>
                     <tr>
                         <th>ID</th>
                         <th>Код ответа</th>
@@ -39,9 +39,8 @@ content = @`
                         <th>description</th>
                         <th>Дата проверки</th>
                     </tr>
-                    </thead>
+                    </tbody>
                     @if(!page.getUrlList().isEmpty())
-                    <tbody>
                     @for(var check : page.getUrlList())
                         <tr>
                             <td>${check.getId()}</td>
@@ -53,7 +52,7 @@ content = @`
                         </tr>
                     @endfor
                     @endif
-                    </tbody>
+
                 </table>
             </div>
         </section>
