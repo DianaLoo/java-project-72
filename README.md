@@ -5,5 +5,5 @@
 [![Java CI](https://github.com/DianaLoo/java-project-72/actions/workflows/main.yml/badge.svg)](https://github.com/DianaLoo/java-project-72/actions/workflows/main.yml)
 
 
-**Page Analyzer - a website that analyzes the specified pages for SEO suitability.
+**Page Analyzer** - a website that analyzes the specified pages for SEO suitability.  
 https://java-project-72-2-lha2.onrender.com
