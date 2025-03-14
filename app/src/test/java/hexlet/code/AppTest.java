@@ -76,18 +76,26 @@ public final class AppTest {
             assertThat(response.body().string()).contains("https://www.example.com");
         });
     }
+    @Test
+    public void test4 () {
+        JavalinTest.test(app, (server, client) -> {
+            String requestBody = "url=https://www.example.com";
+            var response = client.post("/urls", requestBody);
+            assertThat(response.code()).isEqualTo(200);
+            assertThat(response.body().string()).contains("https://www.example.com");
+        });
+    }
 
     @Test
-    public void test4() throws SQLException {
+    public void test5() throws SQLException {
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/urls/7777777");
             assertThat(response.code()).isEqualTo(404);
         });
     }
 
-
     @Test
-    public void test5() throws SQLException {
+    public void test6() throws SQLException {
         String mockUrl = mockServer.url("/").toString();
         Url url = new Url(mockUrl);
         UrlRepository.save(url);
