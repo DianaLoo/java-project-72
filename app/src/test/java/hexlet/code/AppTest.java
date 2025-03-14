@@ -77,7 +77,7 @@ public final class AppTest {
         });
     }
     @Test
-    public void test4 () {
+    public void test4() throws SQLException {
         JavalinTest.test(app, (server, client) -> {
             String requestBody = "url=https://www.example.com";
             var response = client.post("/urls", requestBody);
