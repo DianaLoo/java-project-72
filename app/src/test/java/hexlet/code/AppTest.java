@@ -48,7 +48,7 @@ public final class AppTest {
     }
 
     @Test
-    public void test1() throws Exception {
+    public void testUrlsPage() throws Exception {
 
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/");
@@ -58,7 +58,7 @@ public final class AppTest {
     }
 
     @Test
-    public void test2() throws Exception {
+    public void testUrlPage() throws Exception {
 
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/urls");
@@ -67,7 +67,7 @@ public final class AppTest {
     }
 
     @Test
-    public void test3() throws SQLException {
+    public void testUrlCreate() throws SQLException {
         var url = new Url("https://www.example.com");
         UrlRepository.save(url);
         JavalinTest.test(app, (server, client) -> {
@@ -77,17 +77,18 @@ public final class AppTest {
         });
     }
     @Test
-    public void test4() throws SQLException {
+    public void testUrlsCreate() throws SQLException {
         JavalinTest.test(app, (server, client) -> {
             String requestBody = "url=https://www.example.com";
             var response = client.post("/urls", requestBody);
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string()).contains("https://www.example.com");
+            assertThat(UrlRepository.getEntities().size() == 1);
         });
     }
 
     @Test
-    public void test5() throws SQLException {
+    public void testNotFound() throws SQLException {
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/urls/7777777");
             assertThat(response.code()).isEqualTo(404);
@@ -95,7 +96,7 @@ public final class AppTest {
     }
 
     @Test
-    public void test6() throws SQLException {
+    public void testCheck() throws SQLException {
         String mockUrl = mockServer.url("/").toString();
         Url url = new Url(mockUrl);
         UrlRepository.save(url);

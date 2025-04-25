@@ -10,10 +10,7 @@ import hexlet.code.util.NamedRoutes;
 import io.javalin.http.Context;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-
 import java.sql.SQLException;
-
 
 public class UrlCheckController {
     public static void create(Context ctx) throws SQLException {
@@ -33,8 +30,11 @@ public class UrlCheckController {
 
             UrlCheckRepository.save(urlCheck);
 
+            ctx.sessionAttribute("flash", "Страница успешно проверена");
         } catch (UnirestException e) {
-            ctx.sessionAttribute("flash", "Некорректный URL");
+            ctx.sessionAttribute("flash", "Некорректный адрес");
+        } catch (Exception e) {
+            ctx.sessionAttribute("flash", "Произошла ошибка при проверке страницы");
         }
         ctx.redirect(NamedRoutes.urlPath(id));
     }
